@@ -1,5 +1,3 @@
-#include <mcl/license.hpp>
-
 #pragma once
 
 #include <Eigen/Dense>
