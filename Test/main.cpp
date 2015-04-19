@@ -14,7 +14,11 @@ double inflat(double val)
 BOOST_AUTO_TEST_CASE(my_test)
 {
 	Eigen::MatrixXd in(10.0*Eigen::MatrixXd::Random(5, 5).cwiseAbs());
-	mcl_cpp::mcl mclob(in);
+
+	std::map<size_t, vector<size_t>> results;
+	auto result_cap = [&](size_t r, size_t c) { results[r].push_back(c); };
+
+	mcl_cpp::mcl mclob(in, result_cap);
 	mclob.cluster_mcl(4, 1.5, 60, 2);
 
 	//Eigen::MatrixXd in(3, 3);
