@@ -48,15 +48,15 @@ namespace mcl_cpp
 	private:
 		bool stop(const Eigen::MatrixXd& in, int i)
 		{
-			auto m = in*in;
-			auto diff = (m - in);
-			auto mx = diff.maxCoeff(), mn = diff.minCoeff();
+			Eigen::MatrixXd m = in*in;
+			Eigen::MatrixXd diff = (m - in);
+			double mx = diff.maxCoeff(), mn = diff.minCoeff();
 			return (diff.maxCoeff() == diff.minCoeff());
 		}
 
 		Eigen::MatrixXd normalize(Eigen::MatrixXd& in)
 		{
-			auto one_over_col_sum = in.colwise().sum().cwiseInverse();
+			Eigen::MatrixXd one_over_col_sum = in.colwise().sum().cwiseInverse();
 			Eigen::MatrixXd M_normalized = in * one_over_col_sum.asDiagonal();
 			return std::move(M_normalized);
 		}
