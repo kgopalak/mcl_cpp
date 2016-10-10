@@ -4,13 +4,17 @@
 cmake_minimum_required (VERSION 2.8.11)
 
 project (MCL_CPP)
+
+if(UNIX)
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
+endif()
  
 # Linking statically to boost. If your project requires Dynamic linking, change here
-set(Boost_USE_STATIC_LIBS ON) 
+set(Boost_USE_STATIC_LIBS OFF) 
 set(Boost_USE_MULTITHREADED ON)  
 set(Boost_USE_STATIC_RUNTIME OFF)
 set(BOOST_ROOT $ENV{BOOST_ROOT} ) 
-FIND_PACKAGE(Boost 1.57.0 COMPONENTS system thread date_time chrono graph unit_test_framework)
+FIND_PACKAGE(Boost 1.62.0 COMPONENTS system thread date_time chrono graph unit_test_framework)
 if(Boost_FOUND)
 	SET(MCL_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
 	add_definitions(-DBOOST_LIB_DIAGNOSTIC)
@@ -18,7 +22,8 @@ if(Boost_FOUND)
 endif()
  
 ## EIGEN
-SET(MCL_INCLUDE_DIRS ${MCL_INCLUDE_DIRS} ${EIGEN_ROOT}/include/Eigen3 ${MCL_CPP_SOURCE_DIR})
+FIND_PACKAGE(Eigen3)
+SET(MCL_INCLUDE_DIRS ${MCL_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR} ${MCL_CPP_SOURCE_DIR})
 SET(MCL_STATIC_LINK_LIBS ${MCL_STATIC_LINK_LIBS} ${Boost_LIBRARIES})
 
 INCLUDE_DIRECTORIES(${MCL_INCLUDE_DIRS}) 

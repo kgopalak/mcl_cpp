@@ -1,3 +1,4 @@
+#define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE MCL_TEST
 #include <boost/test/unit_test.hpp>
 #include <boost/lexical_cast.hpp>
@@ -44,7 +45,7 @@ Eigen::MatrixXd readcsv(string file)
 
 BOOST_AUTO_TEST_CASE(examples_csv)
 {
-	Eigen::MatrixXd mat(readcsv("D:\\Source\\Repos\\mcl_cpp\\Test\\example.csv"));
+	Eigen::MatrixXd mat(readcsv("example.csv"));
 
 	std::map<size_t, vector<size_t>> results;
 	auto result_cap = [&](size_t r, size_t c) { results[r].push_back(c); };
